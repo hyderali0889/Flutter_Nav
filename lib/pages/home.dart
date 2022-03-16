@@ -11,27 +11,29 @@ class Home extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black45,
       body: ListView.builder(
-        
         itemCount: movieList.length,
         itemBuilder: (BuildContext context, int index) {
-          return InkWell(
-            onTap: () => {
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>  Contact( movie:movieList[index]  )))
-             } ,
-            child: Card(           
-                color: Colors.blueAccent,
-                child: Padding(
-                  padding: const EdgeInsets.all(25),
-                  child: Text(
-                    movieList[index].title,
-                    style: const TextStyle(fontSize: 30),
-                  ),
-                ),
-                
-              ),
-           
-          );
+          return mainCard(context, movieList[index]);
         },
+      ),
+    );
+  }
+
+  Widget mainCard(BuildContext context, var movie) {
+    return InkWell(
+      onTap: () => {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => Contact(movie: movie)))
+      },
+      child: Card(
+        color: Colors.blueAccent,
+        child: Padding(
+          padding: const EdgeInsets.all(25),
+          child: Text(
+            movie.title,
+            style: const TextStyle(fontSize: 30),
+          ),
+        ),
       ),
     );
   }
