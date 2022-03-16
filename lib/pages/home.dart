@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'contact.dart';
 import '../utils/data.dart';
@@ -9,7 +11,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black45,
+      backgroundColor: const Color(0xff131313),
       body: ListView.builder(
         itemCount: movieList.length,
         itemBuilder: (BuildContext context, int index) {
@@ -42,36 +44,46 @@ class Home extends StatelessWidget {
               padding: const EdgeInsets.all(20.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                color: Colors.red,
+                gradient: LinearGradient(
+                    end: Alignment.bottomRight,
+                    begin: Alignment.topLeft,
+                    colors: [
+                      Colors.grey.withOpacity(0.3),
+                      Colors.grey.withOpacity(0.5),
+                      Colors.grey.withOpacity(0.7)
+                    ]),
                 boxShadow: const [BoxShadow(color: Colors.black87)],
               ),
-              child: Padding(
-                  padding: const EdgeInsets.all(25),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      headingdata(context, "Movie Name"),
-                      movieName(context, movie.title),
-                      headingdata(context, "IMBD Ratings"),
-                      textdata(context, movie.imdbRating),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Column(
+                children: [
+                  img(context, movie.images[0]),
+                  Padding(
+                      padding: const EdgeInsets.all(25),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          headingdata(context, "Metascore "),
-                          headingdata(context, "Release Data "),
+                          headingdata(context, "Movie Name"),
+                          movieName(context, movie.title),
+                          headingdata(context, "IMBD Ratings"),
+                          textdata(context, movie.imdbRating),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              headingdata(context, "Metascore "),
+                              headingdata(context, "Release Data "),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              textdata(context, movie.metascore),
+                              textdata(context, movie.released),
+                            ],
+                          )
                         ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          textdata(context, movie.metascore),
-                          textdata(context, movie.released),
-                        ],
-                      ),
-                      headingdata(context, "Awards Won"),
-                      textdata(context, movie.awards),
-                    ],
-                  ))),
+                      )),
+                ],
+              )),
         ));
   }
 
@@ -117,6 +129,23 @@ class Home extends StatelessWidget {
             fontStyle: FontStyle.italic,
             fontWeight: FontWeight.bold),
       ),
+    );
+  }
+
+// -------------------------- Widget 5 -------------------------
+
+  Widget img(BuildContext context, var img) {
+    return SizedBox(
+      width: double.infinity,
+      height: 244,
+      child: Container(
+          decoration: const BoxDecoration(boxShadow: [
+            BoxShadow(color: Colors.black54, spreadRadius: 4.2, blurRadius: 4.9)
+          ]),
+          child: Image.network(
+            img,
+            fit: BoxFit.cover,
+          )),
     );
   }
 
