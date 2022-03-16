@@ -50,119 +50,75 @@ class Home extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.only(top: 20),
-                        child: Text(
-                          "Movie Name",
-                          style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.cyanAccent,
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Text(
-                            movie.title,
-                            style: const TextStyle(
-                                fontSize: 30,
-                                color: Colors.black,
-                                fontStyle: FontStyle.italic,
-                                fontWeight: FontWeight.bold),
-                          )),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 20),
-                        child: Text(
-                          "IMBD Ratings",
-                          style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.cyanAccent,
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: Text(
-                          "${movie.imdbRating} Rating on IMBD",
-                          style: const TextStyle(
-                              fontSize: 18, color: Colors.white),
-                        ),
-                      ),
+                      headingdata(context, "Movie Name"),
+                      movieName(context, movie.title),
+                      headingdata(context, "IMBD Ratings"),
+                      textdata(context, movie.imdbRating),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Padding(
-                            padding: EdgeInsets.only(top: 20),
-                            child: Text(
-                              "Metascore ",
-                              style: TextStyle(
-                                  fontSize: 25,
-                                  color: Colors.cyanAccent,
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 20),
-                            child: Text(
-                              " Release Data ",
-                              style: TextStyle(
-                                  fontSize: 25,
-                                  color: Colors.cyanAccent,
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          )
+                        children: [
+                          headingdata(context, "Metascore "),
+                          headingdata(context, "Release Data "),
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: Text(
-                              "${movie.metascore} metascore ",
-                              style: const TextStyle(
-                                  fontSize: 18, color: Colors.white),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: Text(
-                              "${movie.released} ",
-                              style: const TextStyle(
-                                  fontSize: 18, color: Colors.white),
-                            ),
-                          )
+                          textdata(context, movie.metascore),
+                          textdata(context, movie.released),
                         ],
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 20),
-                        child: Text(
-                          "Awards Won",
-                          style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.cyanAccent,
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: Text(
-                          "${movie.awards}",
-                          style: const TextStyle(
-                              fontSize: 18, color: Colors.white),
-                        ),
-                      )
+                      headingdata(context, "Awards Won"),
+                      textdata(context, movie.awards),
                     ],
                   ))),
         ));
   }
 
 // ---------------------- Widget 2 -----------------------
+
+  Widget textdata(BuildContext context, var text) {
+    return Center(
+        child: Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Text(
+        "$text",
+        style: const TextStyle(fontSize: 18, color: Colors.white),
+      ),
+    ));
+  }
+
+// ------------------------- Widget 3 -------------------------
+
+  Widget headingdata(BuildContext context, var heading) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Text(
+        "$heading",
+        style: const TextStyle(
+            fontSize: 25,
+            color: Colors.cyanAccent,
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
+// -------------------- Widget 4 ---------------------
+
+  Widget movieName(BuildContext context, var movieName) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Text(
+        "$movieName",
+        style: const TextStyle(
+            fontSize: 30,
+            color: Colors.black,
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.bold),
+      ),
+    );
+  }
 
 // ------------------------------------- End of Main Class -------------------------------------------
 }
