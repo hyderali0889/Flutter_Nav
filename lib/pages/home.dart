@@ -1,8 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'contact.dart';
 import '../utils/data.dart';
+import '../Components/NetworkReq.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
@@ -135,7 +134,7 @@ class Home extends StatelessWidget {
 // -------------------------- Widget 5 -------------------------
 
   Widget img(BuildContext context, var img) {
-     return SizedBox(
+    return SizedBox(
       width: double.infinity,
       height: 244,
       child: Container(
@@ -147,9 +146,31 @@ class Home extends StatelessWidget {
             fit: BoxFit.cover,
           )),
     );
-    
-    
   }
 
 // ------------------------------------- End of Main Class -------------------------------------------
+}
+
+class NetworkRequest extends StatefulWidget {
+  const NetworkRequest({Key? key}) : super(key: key);
+
+  @override
+  State<NetworkRequest> createState() => _NetworkRequestState();
+}
+
+class _NetworkRequestState extends State<NetworkRequest> {
+  late Future data;
+
+  @override
+  void initState() {
+    super.initState();
+
+    data = Network("https://jsonplaceholder.typicode.com/posts").getData();
+    data.then((value) => print(value[0]));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
 }
