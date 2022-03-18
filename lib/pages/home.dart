@@ -135,7 +135,6 @@ class Home extends StatelessWidget {
 // -------------------------- Widget 5 -------------------------
 
   Widget img(BuildContext context, var img) {
-   try{ 
      return SizedBox(
       width: double.infinity,
       height: 244,
@@ -148,11 +147,7 @@ class Home extends StatelessWidget {
             fit: BoxFit.cover,
           )),
     );
-    } catch(e){
-     return const Center( 
-       child : Text("Oops")
-      );
-    }
+    
     
   }
 
