@@ -166,11 +166,62 @@ class _NetworkRequestState extends State<NetworkRequest> {
     super.initState();
 
     data = Network("https://jsonplaceholder.typicode.com/posts").getData();
-    data.then((value) => print(value[0]));
+  //  data.then((value) => print(value[0]));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+        body: Container(
+      padding: const EdgeInsets.all(10),
+      child: FutureBuilder(
+        future: data,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) {
+            return list(context, snapshot.data);
+          }
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Colors.blue,
+            ),
+          );
+        },
+      ),
+    ));
+  }
+
+  Widget list(BuildContext context, List data) {
+    return Container(
+        padding: const EdgeInsets.all(0.0),
+        child: Flexible(
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: data.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                  margin: const EdgeInsets.symmetric(vertical: 20.0),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 1.0),
+                      borderRadius: BorderRadius.circular(12.0)),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                        backgroundColor: Colors.black.withOpacity(0.2),
+                        radius: 14,
+                        child: Text(
+                          "${data[index]["id"]}",
+                          style: const TextStyle(color: Colors.black),
+                        )),
+                    title: Text(
+                      data[index]["title"],
+                      style: const TextStyle(fontSize: 24, color: Colors.black),
+                    ),
+                    subtitle: Text(data[index]["body"],
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black.withOpacity(0.4))),
+                  ));
+            },
+          ),
+        ));
   }
 }
